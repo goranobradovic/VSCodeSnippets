@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>go_JSPartialClass</Title>
+      <Author>Goran</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>ClassName</ID>
+          <ToolTip>name of class</ToolTip>
+          <Default>MyClass</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>SubClass</ID>
+          <ToolTip>name of subclass</ToolTip>
+          <Default>SubClass</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="javascript"><![CDATA[var $ClassName$ = (function ($ClassName$) {
+    var self = $ClassName$;
+
+    function $SubClass$() {
+
+        return {
+            SubMethod: {}
+        };
+    }
+
+    function init() {
+        self.$SubClass$ = self.$SubClass$ || $SubClass$();
+    };
+    $(document).ready(init);
+    return self;
+}($ClassName$ || {}));]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

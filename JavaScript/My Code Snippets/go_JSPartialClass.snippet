@@ -6,7 +6,7 @@
         <SnippetType>Expansion</SnippetType>
       </SnippetTypes>
       <Title>go_JSPartialClass</Title>
-      <Author>Goran</Author>
+      <Author>Goran Obradovic</Author>
       <Description>
       </Description>
       <HelpUrl>
@@ -30,23 +30,54 @@
           <Function>
           </Function>
         </Literal>
+        <Literal Editable="true">
+          <ID>jQuery</ID>
+          <ToolTip>jQuery</ToolTip>
+          <Default>$</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>MethodName</ID>
+          <ToolTip>MethodName</ToolTip>
+          <Default>MethodName</Default>
+          <Function>
+          </Function>
+        </Literal>
       </Declarations>
-      <Code Language="javascript"><![CDATA[var $ClassName$ = (function ($ClassName$) {
+      <Code Language="javascript"><![CDATA[
+var $ClassName$ = (function ($ClassName$) {
+	/// <summary>
+	/// part of the $ClassName$ module
+	/// </summary>
     var self = $ClassName$;
 
     function $SubClass$() {
-
+	/// <summary>
+	/// $SubClass$ submodule of the $ClassName$
+	/// </summary>
+        var _$MethodName$ = function(){
+	        /// <summary>
+	        /// $MethodName$ method in $ClassName$.$SubClass$
+	        /// </summary>
+        }
         return {
-            SubMethod: {}
+	        /// $ClassName$.$MethodName$.$MethodName$()
+            $MethodName$: _$MethodName$
         };
     }
 
     function init() {
+	    /// <summary>
+        /// This places result of $SubClass$() execution under
+	    /// $ClassName$.$MailConfigurator$
+	    /// </summary>
         self.$SubClass$ = self.$SubClass$ || $SubClass$();
     };
-    $(document).ready(init);
+    $jQuery$(document).ready(init);
     return self;
-}($ClassName$ || {}));]]></Code>
+}($ClassName$ || {}));
+]]></Code>
     </Snippet>
   </CodeSnippet>
 </CodeSnippets>

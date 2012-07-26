@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>SnippetFile1</Title>
+      <Author>goranobradovic@msn.com</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>10</ID>
+          <ToolTip>Default page size</ToolTip>
+          <Default>10</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp"><![CDATA[
+    public class BaseFilter<TModel>
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:BaseFilter"/> class.
+        /// </summary>
+        public BaseFilter()
+        {
+            Page = 0;
+            PageSize = DefaultPageSize;
+            OrderFunc = query => query.OrderBy(o => o);
+        }
+        public static int DefaultPageSize = $10$F;
+        
+        /// <summary>
+        /// Gets or sets the page.
+        /// </summary>
+        /// <value>The page.</value>
+        public int Page
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the page size.
+        /// </summary>
+        /// <value>The page size.</value>
+        public int PageSize
+        {
+            get;
+            set;
+        }
+
+        public Func<IQueryable<TModel>, IOrderedQueryable<TModel>> OrderFunc
+        {
+            get;
+            set;
+        }
+    }
+
+    public class BaseFilteringResult<TModel>
+    {
+        /// <summary>
+        /// Gets or sets the total count.
+        /// </summary>
+        /// <value>The total count.</value>
+        public int TotalCount
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the base filter request.
+        /// </summary>
+        /// <value>The base filter request.</value>
+        public BaseFilter<TModel> Request
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
+        /// Gets or sets the results.
+        /// </summary>
+        /// <value>The results.</value>
+        public List<TModel> Results
+        {
+            get;
+            set;
+        } 
+    }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>SnippetFile1</Title>
+      <Author>goranobradovic@msn.com</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>BaseController</ID>
+          <ToolTip>BaseController</ToolTip>
+          <Default>BaseController</Default>
+          <Function>Name for your base controller class</Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>BaseDomainEntity</ID>
+          <ToolTip>BaseDomainEntity</ToolTip>
+          <Default>BaseDomainEntity</Default>
+          <Function>Name of your base class for entities hierarchy</Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>BaseService</ID>
+          <ToolTip>BaseService</ToolTip>
+          <Default>BaseService</Default>
+          <Function>Class representing your base generic service</Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp"><![CDATA[
+    public class $BaseController$<TModel> : Controller where TModel : $BaseDomainEntity$, new()
+    {
+        //
+        // GET: /Base/
+
+        public virtual ActionResult Index()
+        {
+            return View($BaseService$<TModel>.GetAll().ToList());
+        }
+
+        //
+        // GET: /Base/Details/5
+
+        public virtual ActionResult Details(TModel item)
+        {
+            return View($BaseService$<TModel>.Get(item));
+        }
+
+        //
+        // GET: /Base/Create
+
+        public virtual ActionResult Create()
+        {
+            return View(new TModel());
+        }
+
+        //
+        // POST: /Base/Create
+
+        [HttpPost]
+        public virtual ActionResult Create(TModel model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    $BaseService$<TModel>.Add(model);
+                    //$BaseService$<TModel>.SaveChangedItems();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(model);
+                }
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        //
+        // GET: /Base/Edit/5
+
+        public virtual ActionResult Edit(TModel item)
+        {
+            return View($BaseService$<TModel>.Get(item));
+        }
+
+        //
+        // POST: /Base/Edit/5
+
+        [HttpPost]
+        public virtual ActionResult Edit(TModel item, FormCollection collection)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var model = $BaseService$<TModel>.Get(item);
+                    if (TryUpdateModel(model))
+                    {
+                        $BaseService$<TModel>.SaveChangedItems();
+                        return RedirectToAction("Index");
+                    }
+                }
+            }
+            catch
+            {
+            }
+            return View();
+        }
+
+        //
+        // GET: /Base/Delete/5
+
+        public virtual ActionResult Delete(TModel item)
+        {
+            return View($BaseService$<TModel>.Get(item));
+        }
+
+        //
+        // POST: /Base/Delete/5
+
+        [HttpPost]
+        public virtual ActionResult Delete(TModel item, FormCollection collection)
+        {
+            try
+            {
+                $BaseService$<TModel>.Delete(item);
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+    }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

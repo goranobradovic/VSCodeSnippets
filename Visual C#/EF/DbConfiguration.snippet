@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>DbConfiguration</Title>
+      <Author>goranobradovic@msn.com</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>schemaname</ID>
+          <ToolTip>name of database schema</ToolTip>
+          <Default>dbo</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>BaseIdModel</ID>
+          <ToolTip>BaseIdModel</ToolTip>
+          <Default>BaseIdModel</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>BaseNamedModel</ID>
+          <ToolTip>BaseNamedModel</ToolTip>
+          <Default>BaseNamedModel</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp"><![CDATA[public partial class DbConfiguration
+    {
+        public interface IEntityConfiguration
+        {
+            void Register(DbModelBuilder builder);
+        }
+
+        public static void RegisterAll(DbModelBuilder builder)
+        {
+            var configurations = GetAllConfigurations();
+            configurations.ForEach(c =>
+            {
+                c.Register(builder);
+            });
+        }
+
+        public static List<IEntityConfiguration> GetAllConfigurations()
+        {
+            return typeof(DbConfiguration).Assembly.GetTypes().Where(t =>
+                !t.IsAbstract &&
+                typeof(IEntityConfiguration).IsAssignableFrom(t))
+                .Select(t =>
+                {
+                    return Activator.CreateInstance(t) as IEntityConfiguration;
+                })
+                .ToList();
+        }
+
+        public abstract class BaseConfiguration<TModel> : EntityTypeConfiguration<TModel>, IEntityConfiguration where TModel : class
+        {
+            public string SchemaName = "$schemaname$";
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:BaseConfiguration"/> class.
+            /// </summary>
+            public BaseConfiguration()
+            {
+                this.ToTable(typeof(TModel).Name, SchemaName);
+            }
+
+            public void Register(DbModelBuilder builder)
+            {
+                builder.Configurations.Add(this);
+            }
+        }
+        
+        public abstract class BaseIdConfiguration<TModel, TKey> : BaseConfiguration<TModel> where TModel : $BaseIdModel$<TKey>
+        {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:BaseIdConfiguration"/> class.
+            /// </summary>
+            public BaseIdConfiguration()
+            {
+                this.HasKey<TKey>(model => model.Id);
+            }
+        }
+
+        public abstract class BaseNamedModelConfiguration<TModel> : BaseConfiguration<TModel> where TModel : $BaseNamedModel$
+        {
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:TagConfiguration"/> class.
+            /// </summary>
+            public BaseNamedModelConfiguration()
+            {
+                this.HasKey<string>(t => t.Name);
+            }
+        }
+
+    }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

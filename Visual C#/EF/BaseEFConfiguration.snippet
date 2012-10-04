@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>BaseEFConfiguration</Title>
+      <Author>goranobradovic@msn.com</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>constraint</ID>
+          <ToolTip>constraint</ToolTip>
+          <Default>class</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>schemaName</ID>
+          <ToolTip>schemaName</ToolTip>
+          <Default>dbo</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp"><![CDATA[        public class BaseConfiguration<TModel> : EntityTypeConfiguration<TModel> where TModel : $constraint$
+        {
+            public static string SchemaName = "$schemaName$";
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:BaseConfiguration"/> class.
+            /// </summary>
+            public BaseConfiguration()
+            {
+                this.ToTable(typeof(TModel).Name, SchemaName);
+            }
+        }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

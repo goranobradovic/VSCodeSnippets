@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>RavenDBApiController</Title>
+      <Author>goranobradovic@msn.com</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Object Editable="true">
+          <ID>object</ID>
+          <ToolTip>TModel constraint</ToolTip>
+          <Default>object</Default>
+          <Function>
+          </Function>
+          <Type>
+          </Type>
+        </Object>
+        <Object Editable="true">
+          <ID>ValueType</ID>
+          <ToolTip>Primary key type</ToolTip>
+          <Default>ValueType</Default>
+          <Function>
+          </Function>
+          <Type>
+          </Type>
+        </Object>
+      </Declarations>
+      <Code Language="csharp"><![CDATA[public abstract class BaseApiControllerOnRaven<TModel> : ApiController where TModel : $object$
+    {
+        public static string connectionStringName = "RavenDB";
+        public static string dbName = "testDb";
+        private static DocumentStore _dbFactory;
+        protected IDocumentSession db;
+
+        protected static DocumentStore DbFactory
+        {
+            get
+            {
+                if (_dbFactory == null)
+                {
+                    _dbFactory = new DocumentStore() { ConnectionStringName = connectionStringName };
+                    _dbFactory.Initialize();
+                }
+                return _dbFactory;
+            }
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:BaseApiControllerOnRaven"/> class.
+        /// </summary>
+        public BaseApiControllerOnRaven()
+        {
+            db = DbFactory.OpenSession(dbName);
+        }
+
+        public virtual IQueryable<TModel> GetAll()
+        {
+            return db.Query<TModel>();
+        }
+
+        public virtual TModel Get($ValueType$ id)
+        {
+            return db.Load<TModel>(id);
+        }
+
+        public virtual void Delete($ValueType$ id)
+        {
+            db.Delete<TModel>(this.Get(id));
+        }
+
+        [HttpPost]
+        public virtual void Add(TModel item)
+        {
+            db.Store(item);
+        }
+    }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

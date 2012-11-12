@@ -1,0 +1,3 @@
+[submodule "JS/jquery"]
+	path = JS/jquery
+	url = git://github.com/xxkylexx/Visual-Studio-jQuery-Code-Snippets

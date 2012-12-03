@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>EFContext</Title>
+      <Author>goranobradovic@msn.com</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>ContextName</ID>
+          <ToolTip>name of context class</ToolTip>
+          <Default>DataContext</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>DbMigrator</ID>
+          <ToolTip>name of data migrator class</ToolTip>
+          <Default>DbMigrator</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>MainModel</ID>
+          <ToolTip>name of main model class</ToolTip>
+          <Default>MainModel</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>MainModelItems</ID>
+          <ToolTip>name of class which is type of collection in main model</ToolTip>
+          <Default>MainModelItems</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp"><![CDATA[public class $ContextName$ : DbContext
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:$ContextName$"/> class.
+        /// </summary>
+        static $ContextName$()
+        {
+            Database.SetInitializer<$ContextName$>(new MigrateDatabaseToLatestVersion<$ContextName$, Configurations.$DbMigrator$>());
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Configurations.Add(new Configurations.$MainModel$Configuration());
+            modelBuilder.Configurations.Add(new Configurations.$MainModelItems$Configuration());
+        }
+
+        public DbSet<$MainModel$> $MainModel$ { get; set; }
+
+
+        public class Configurations
+        {
+
+            public class $DbMigrator$ : System.Data.Entity.Migrations.DbMigrationsConfiguration<$ContextName$>
+            {
+                /// <summary>
+                /// Initializes a new instance of the <see cref="T:$DbMigrator$"/> class.
+                /// </summary>
+                public $DbMigrator$()
+                {
+                    this.AutomaticMigrationsEnabled = true;
+                    this.AutomaticMigrationDataLossAllowed = true;
+                }
+            }
+
+            public class $MainModel$Configuration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<$MainModel$>
+            {
+                /// <summary>
+                /// Initializes a new instance of the <see cref="T:$MainModel$Configuration"/> class.
+                /// </summary>
+                public $MainModel$Configuration()
+                {
+                    this.HasKey(p => p.Id);
+                    this.HasMany(p => p.$MainModelItems$s)
+                        .WithRequired();
+                }
+            }
+
+            public class $MainModelItems$Configuration : System.Data.Entity.ModelConfiguration.EntityTypeConfiguration<$MainModelItems$>
+            {
+                /// <summary>
+                /// Initializes a new instance of the <see cref="T:$MainModelItems$Configuration"/> class.
+                /// </summary>
+                public $MainModelItems$Configuration()
+                {
+                    this.HasKey(t => t.Id);
+                }
+            }
+        }
+    }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

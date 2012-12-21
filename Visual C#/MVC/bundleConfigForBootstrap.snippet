@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>bundleConfigForBootstrap</Title>
+      <Author>Goran</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="csharp"><![CDATA[
+
+      bundles.Add(new ScriptBundle("~/jquery").Include(
+                  "~/Scripts/jquery-{version}.js",
+                  "~/Scripts/jquery-ui-{version}.js",
+                  "~/Scripts/jquery-ui-i18n.js"));
+
+      bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+                  "~/Scripts/jquery.unobtrusive*",
+                  "~/Scripts/jquery.validate*"));
+
+      bundles.Add(new ScriptBundle("~/js").Include(
+          "~/Scripts/jquery-1.*",
+          "~/Scripts/bootstrap.js",
+          "~/Scripts/jquery.validate.js",
+          "~/scripts/jquery.validate.unobtrusive.js",
+          "~/Scripts/jquery.validate.unobtrusive-custom-for-bootstrap.js"
+          ));
+
+      var bootstrapcss = new StyleBundle("~/content/css").Include(
+          "~/Content/less/bootstrap.less",
+          "~/Content/less/bootstrap-responsive.less"
+          );
+      bundles.Add(bootstrapcss);
+
+      // Use the development version of Modernizr to develop with and learn from. Then, when you're
+      // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
+      bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+                  "~/Scripts/modernizr-*"));
+
+      bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+
+      bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
+                  "~/Content/themes/base/jquery.ui.core.css",
+                  "~/Content/themes/base/jquery.ui.resizable.css",
+                  "~/Content/themes/base/jquery.ui.selectable.css",
+                  "~/Content/themes/base/jquery.ui.accordion.css",
+                  "~/Content/themes/base/jquery.ui.autocomplete.css",
+                  "~/Content/themes/base/jquery.ui.button.css",
+                  "~/Content/themes/base/jquery.ui.dialog.css",
+                  "~/Content/themes/base/jquery.ui.slider.css",
+                  "~/Content/themes/base/jquery.ui.tabs.css",
+                  "~/Content/themes/base/jquery.ui.datepicker.css",
+                  "~/Content/themes/base/jquery.ui.progressbar.css",
+                  "~/Content/themes/base/jquery.ui.theme.css"));
+    }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

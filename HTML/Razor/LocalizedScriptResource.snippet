@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>LocalizedScriptResource</Title>
+      <Author>goranobradovic@msn.com</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Resources</ID>
+          <ToolTip>Resources</ToolTip>
+          <Default>Resources</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="html"><![CDATA[@model Dictionary<string, string>
+@{
+    Layout = string.Empty;
+    var delimiter = "," + Environment.NewLine;
+}
+
+<script type="text/javascript">
+var $Resources$ = {
+@Html.Raw(String.Join(delimiter, Model.Select(item => string.Format("\t'{0}': '{1}'", item.Key, item.Value))))
+}
+</script>
+]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

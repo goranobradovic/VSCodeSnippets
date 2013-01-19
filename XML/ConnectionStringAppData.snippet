@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>ConnectionStringAppDataUserInstance</Title>
+      <Author>Goran</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+	  connStrAppData
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>DefaultConnection</ID>
+          <ToolTip>DefaultConnection</ToolTip>
+          <Default>DefaultConnection</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>databasename</ID>
+          <ToolTip>databasename</ToolTip>
+          <Default>databasename</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>SqlServerInstance</ID>
+          <ToolTip>sql server</ToolTip>
+          <Default>.\SQLEXPRESS</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="xml"><![CDATA[    <add name="$DefaultConnection$" connectionString="Data Source=$SqlServerInstance$;AttachDbFilename=|DataDirectory|\$databasename$.mdf;Initial Catalog=$databasename$;Integrated Security=True;User Instance=True"
+      providerName="System.Data.SqlClient" />]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

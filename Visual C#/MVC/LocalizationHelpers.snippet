@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>LocalizationHelpers</Title>
+      <Author>goranobradovic@msn.com</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Code Language="csharp"><![CDATA[
+    using System.Globalization;
+    using System.Web.Mvc;
+    using System.Web.Mvc.Html;
+    using Resource = Resources.Localize;
+
+    public static class LocalizationHelpers
+    {
+        public static string DateFormat(this HtmlHelper helper)
+        {
+            if (string.IsNullOrEmpty(Resource.DateFormat))
+            {
+                return CultureInfo.CurrentUICulture.DateTimeFormat.ShortDatePattern;
+            }
+            return Resource.DateFormat;
+        }
+
+        public static string Localize(this HtmlHelper helper, string value = null)
+        {
+            return Resource.ResourceManager.GetString(value ?? helper.IdForModel().ToString()) ?? value ?? helper.NameForModel().ToString();
+        }
+    }]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

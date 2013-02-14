@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>OutputCacheNode</Title>
+      <Author>goranobradovic@msn.com</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>outputCache</Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>ScriptResources</ID>
+          <ToolTip>profile name</ToolTip>
+          <Default>ScriptResources</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>id</ID>
+          <ToolTip>parameter name</ToolTip>
+          <Default>id</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>3600</ID>
+          <ToolTip>duration in miliseconds</ToolTip>
+          <Default>3600</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="xml"><![CDATA[<caching>
+      <outputCache enableOutputCache="true" />
+      <outputCacheSettings>
+        <outputCacheProfiles>
+          <add name="$ScriptResources$" location="ServerAndClient" varyByParam="$id$" duration="$3600$" enabled="true"/>
+        </outputCacheProfiles>
+      </outputCacheSettings>
+    </caching>]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>
